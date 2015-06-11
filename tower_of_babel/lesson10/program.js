@@ -10,10 +10,6 @@ var json = {
   }
 };
 
-var name = json.name;
-
-var {first, family} = name;
-
-console.log(json.name);
-console.log(first);
-
+var {name: {family: familyName}, birth: {day: birthDay}} = json;
+console.log(familyName);
+console.log(birthDay);
