@@ -18,6 +18,7 @@
   "homepage": "https://github.com/rei-m/js_neta#readme",
   "devDependencies": {
     "gulp": "^3.9.0",
+    "gulp-babel": "^5.1.0",
     "gulp-uglify": "^1.2.0"
   }
 }
