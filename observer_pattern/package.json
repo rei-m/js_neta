@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/rei-m/js_neta/issues"
   },
-  "homepage": "https://github.com/rei-m/js_neta#readme"
+  "homepage": "https://github.com/rei-m/js_neta#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-uglify": "^1.2.0"
+  }
 }
