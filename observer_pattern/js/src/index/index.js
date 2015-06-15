@@ -3,7 +3,7 @@
  * バリデーションの結果に応じてイベントを通知する.
  */
 
-import AppView from "./compornents/AppView"
+import AppView from "./AppView"
 
 $(function(){
   $("input").each(function() {
