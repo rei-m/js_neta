@@ -1,7 +1,7 @@
 {
   "name": "observer_pattern",
   "version": "1.0.0",
-  "description": "GulpとBabelとwebpack使ってみた",
+  "description": "GulpとBabelとwebpackとbower使ってみた",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
