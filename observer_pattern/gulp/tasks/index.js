@@ -6,7 +6,7 @@ var gulp = require("gulp"),
 
 // タスク名はファイル名と揃える
 gulp.task("index", function () {
-    gulp.src(config.webpack.entry)
+    gulp.src(config.src)
         .pipe(webpack(config.webpack))
         .pipe(gulpif(config.js.uglify, uglify()))
         .pipe(gulp.dest(config.js.dest)); //出力

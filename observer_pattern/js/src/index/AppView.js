@@ -11,8 +11,12 @@ export default class AppView {
     // エレメントを取得.
     this.$el = $(el);
 
-    // エラー表示用のリストを取得.
-    this.$list = this.$el.next().children();
+    // エラー表示用のリストを作成.
+    this.$list = $("<ul>");
+    this.$el.after(this.$list);
+
+//    this.$list = this.$el.next().children();
+
 
     // エレメントのdata属性の値を取得.
     let obj = this.$el.data();

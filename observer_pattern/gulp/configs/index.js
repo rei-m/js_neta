@@ -12,6 +12,9 @@ module.exports = {
   // タスク名
   taskName : taskName,
 
+  // リソース
+  src : src + "/**/*.js",
+  
   // jsのビルド設定
   js: {
     dest: dest,
