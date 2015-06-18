@@ -11,19 +11,42 @@ export default class AppView {
     // エレメントを取得.
     this.$el = $(el);
 
-    // エラー表示用のリストを取得.
-    this.$list = this.$el.next().children();
-
     // エレメントのdata属性の値を取得.
-    let obj = this.$el.data();
+    let elData = this.$el.data();
 
-    // エレメントにrequired属性がついているか判定
-    if (this.$el.prop("required")) {
-      obj["required"] = "";
+    // エラー表示用のリストを作成.
+    let $errors = $("<ul>");
+
+    // チェック仕様に従い、エラー情報を作成.
+    if (this.$el.attr("required")) {
+      elData["required"] = "";
+      $errors.append($("<li>").attr("data-error", "required").text("必須項目です"));
     }
 
+    if (this.$el.attr("data-minlength")) {
+      let $li = $("<li>")
+                  .attr("data-error", "minlength")
+                  .text(`${this.$el.data("minlength")}文字以上で入力してください`);
+      $errors.append($li);
+    }
+
+    if (this.$el.attr("data-maxlength")) {
+      let $li = $("<li>")
+                  .attr("data-error", "maxlength")
+                  .text(`${this.$el.data("maxlength")}文字以内で入力してください`);
+      $errors.append($li);
+    }
+
+    if (0 < $errors.children().length) {
+      this.$el.after($errors);
+    }
+
+    this.$list = $errors.children();
+
     // Modelを作成し、Viewのプロパティとする.
-    this.model = new AppModel(obj);
+    this.model = new AppModel(elData);
+
+    // Eventを登録する.
     this.handleEvents();
   }
 
@@ -59,7 +82,6 @@ export default class AppView {
     let self = this;
     this.$el.addClass("error");
     this.$list.hide();
-
     this.model.errors.map((val) => {
       self.$list.filter(`[data-error="${val}"]`).show();
     });

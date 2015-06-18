@@ -8,14 +8,7 @@ export default class AppModel {
     this.val = "";
 
     // Validateの定義
-    this.attrs = attrs;
-    if (attrs === void 0) {
-      this.attrs = {
-            required : "",
-            maxlength : 8,
-            minlength : 4
-          };
-    }
+    this.attrs = (attrs === void 0) ? {} : attrs;
 
     // Observerの機構を実装.
     this.listeners = {
