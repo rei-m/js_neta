@@ -12,13 +12,14 @@ export default class AppView {
     this.$el = $(el);
 
     // エレメントのdata属性の値を取得.
-    let obj = this.$el.data();
+    let elData = this.$el.data();
 
     // エラー表示用のリストを作成.
     let $errors = $("<ul>");
 
     // チェック仕様に従い、エラー情報を作成.
-    if (this.$el.prop("required")) {
+    if (this.$el.attr("required")) {
+      elData["required"] = "";
       $errors.append($("<li>").attr("data-error", "required").text("必須項目です"));
     }
 
@@ -43,7 +44,9 @@ export default class AppView {
     this.$list = $errors.children();
 
     // Modelを作成し、Viewのプロパティとする.
-    this.model = new AppModel(obj);
+    this.model = new AppModel(elData);
+
+    // Eventを登録する.
     this.handleEvents();
   }
 
