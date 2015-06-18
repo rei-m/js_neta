@@ -75,7 +75,7 @@ export default class AppView {
 
   onValid() {
     this.$el.removeClass("error");
-    this.$list.hide();
+    this.$list.hide();    
   }
 
   onInValid() {

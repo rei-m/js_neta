@@ -1,9 +1,13 @@
+import ObserverModel from "../common/ObserverModel"
+
 /**
  * Modelの作成
  */
-export default class AppModel {
+export default class AppModel extends ObserverModel {
 
   constructor(attrs) {
+
+    super();
 
     this.val = "";
 
@@ -11,20 +15,8 @@ export default class AppModel {
     this.attrs = (attrs === void 0) ? {} : attrs;
 
     // Observerの機構を実装.
-    this.listeners = {
-      valid: [],
-      invalid: []
-    };
-  }
-
-  on(event, func) {
-    this.listeners[event].push(func);
-  }
-
-  trigger(event) {
-    this.listeners[event].map((func) => {
-      func();
-    });
+    this.listeners["valid"] = [];
+    this.listeners["invalid"] = [];
   }
 
   set(val) {
@@ -46,7 +38,9 @@ export default class AppModel {
     }
 
     // Validationの結果に応じた処理を実行
-    this.trigger(!this.errors.length ? "valid" : "invalid");
+    let isErr = (this.errors.length);
+
+    this.trigger(!isErr ? "valid" : "invalid");
   };
 
   // 必須チェック
