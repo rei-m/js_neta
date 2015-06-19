@@ -3,14 +3,14 @@
  * バリデーションの結果に応じてイベントを通知する.
  */
 
-import AppView from "./AppView"
+import InputTextView from "../common/InputTextView"
 
 $(function(){
 
   let inputs = [];
 
   $("input[type='text']").each(function() {
-    inputs.push(new AppView(this));
+    inputs.push(new InputTextView(this));
   });
 
   $("#submit").on("click", function(e){

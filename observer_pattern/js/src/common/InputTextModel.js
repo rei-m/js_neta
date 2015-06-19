@@ -1,9 +1,9 @@
-import ObserverModel from "../common/ObserverModel"
+import ObserverModel from "./ObserverModel"
 
 /**
  * Modelの作成
  */
-export default class AppModel extends ObserverModel {
+export default class InputTextModel extends ObserverModel {
 
   constructor(attrs) {
 
