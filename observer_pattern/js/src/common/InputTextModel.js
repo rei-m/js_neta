@@ -34,8 +34,6 @@ export default class InputTextModel extends ObserverModel {
     // attrで定義したチェックを実行
     for (let key in this.attrs) {
       val = this.attrs[key];
-      console.log(this.attrs);
-      console.log(val);
       if (!this[key](val)) this.errors.push(key);
     }
 
@@ -45,5 +43,19 @@ export default class InputTextModel extends ObserverModel {
     this.trigger(!isErr ? "valid" : "invalid");
   };
 
+  // 必須チェック
+  required() {
+    return this.val !== "";
+  };
+
+  // 文字数上限チェック
+  maxlength(num) {
+    return this.val.length <= num;
+  };
+
+  // 文字数下限チェック
+  minlength(num) {
+    return num <= this.val.length;
+  };
 
 }

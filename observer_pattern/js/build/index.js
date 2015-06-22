@@ -268,8 +268,6 @@
 	      // attrで定義したチェックを実行
 	      for (var key in this.attrs) {
 	        val = this.attrs[key];
-	        console.log(this.attrs);
-	        console.log(val);
 	        if (!this[key](val)) this.errors.push(key);
 	      }
 
@@ -277,6 +275,27 @@
 	      var isErr = this.errors.length;
 
 	      this.trigger(!isErr ? "valid" : "invalid");
+	    }
+	  }, {
+	    key: "required",
+
+	    // 必須チェック
+	    value: function required() {
+	      return this.val !== "";
+	    }
+	  }, {
+	    key: "maxlength",
+
+	    // 文字数上限チェック
+	    value: function maxlength(num) {
+	      return this.val.length <= num;
+	    }
+	  }, {
+	    key: "minlength",
+
+	    // 文字数下限チェック
+	    value: function minlength(num) {
+	      return num <= this.val.length;
 	    }
 	  }]);
 
