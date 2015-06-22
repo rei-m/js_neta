@@ -1,10 +1,10 @@
 
-import AppModel from "./AppModel"
+import InputTextModel from "./InputTextModel"
 
 /**
  * Viewの作成
  */
-export default class AppView {
+export default class InputTextView {
 
   constructor(el) {
 
@@ -44,7 +44,7 @@ export default class AppView {
     this.$list = $errors.children();
 
     // Modelを作成し、Viewのプロパティとする.
-    this.model = new AppModel(elData);
+    this.model = new InputTextModel(elData);
 
     // Eventを登録する.
     this.handleEvents();

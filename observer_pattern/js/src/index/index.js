@@ -3,10 +3,15 @@
  * バリデーションの結果に応じてイベントを通知する.
  */
 
-import AppView from "./AppView"
+import InputTextView from "../common/InputTextView"
+import {InputSubmitCreateUserView} from "./IndexView"
 
-$(function(){
-  $("input").each(function() {
-    new AppView(this);
-  });
+$(() => {
+
+
+  let $inputTextId = new InputTextView($("#input-text-id"));
+
+  let $inputTextPass = new InputTextView($("#input-text-password"));
+
+  new InputSubmitCreateUserView("#submit", $inputTextId, $inputTextPass);
 });
