@@ -9,23 +9,9 @@ import {InputSubmitCreateUserView} from "./IndexView"
 $(() => {
 
 
-  $("input[type='text']").each(function() {
-    new InputTextView(this);
-  });
+  let $inputTextId = new InputTextView($("#input-text-id"));
 
+  let $inputTextPass = new InputTextView($("#input-text-password"));
 
-/*
-  let inputTextId = new InputTextView($("#input-text-id"));
-
-  let inputTextPass = new InputTextView($("#input-text-password"));
-
-  new InputSubmitCreateUserView("#submit", inputTextId, inputTextPass);
-*/
-/*
-  $("#submit").on("click", function(e){
-    e.preventDefault();
-    e.stopPropagation();
-    alert(inputs.length);
-  });
-*/
+  new InputSubmitCreateUserView("#submit", $inputTextId, $inputTextPass);
 });

@@ -61,24 +61,11 @@
 
 	$(function () {
 
-	  $("input[type='text']").each(function () {
-	    new _commonInputTextView2["default"](this);
-	  });
+	  var $inputTextId = new _commonInputTextView2["default"]($("#input-text-id"));
 
-	  /*
-	    let inputTextId = new InputTextView($("#input-text-id"));
-	  
-	    let inputTextPass = new InputTextView($("#input-text-password"));
-	  
-	    new InputSubmitCreateUserView("#submit", inputTextId, inputTextPass);
-	  */
-	  /*
-	    $("#submit").on("click", function(e){
-	      e.preventDefault();
-	      e.stopPropagation();
-	      alert(inputs.length);
-	    });
-	  */
+	  var $inputTextPass = new _commonInputTextView2["default"]($("#input-text-password"));
+
+	  new _IndexView.InputSubmitCreateUserView("#submit", $inputTextId, $inputTextPass);
 	});
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
@@ -383,6 +370,8 @@
 	    _classCallCheck(this, InputSubmitCreateUserView);
 
 	    _get(Object.getPrototypeOf(InputSubmitCreateUserView.prototype), "constructor", this).call(this, el);
+	    this.inputTextIdModel = $inputTextId.model;
+	    this.inputTextPassModel = $inputTextPass.model;
 	  }
 
 	  _inherits(InputSubmitCreateUserView, _InputSubmitView);
@@ -390,8 +379,13 @@
 	  _createClass(InputSubmitCreateUserView, [{
 	    key: "onClick",
 	    value: function onClick(e) {
+
+	      // デフォルトの動作はキャンセル.
+	      e.preventDefault();
+	      e.stopPropagation();
+
 	      var $target = $(e.currentTarget);
-	      alert(11234);
+
 	      //    this.model.set($target.val());
 	    }
 	  }]);
