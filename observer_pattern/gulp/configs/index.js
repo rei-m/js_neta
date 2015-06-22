@@ -14,11 +14,11 @@ module.exports = {
 
   // リソース
   src : src + "/**/*.js",
-  
+
   // jsのビルド設定
   js: {
     dest: dest,
-    uglify: true
+    uglify: false
   },
 
   // webpackの設定

@@ -4,18 +4,28 @@
  */
 
 import InputTextView from "../common/InputTextView"
+import {InputSubmitCreateUserView} from "./IndexView"
 
-$(function(){
+$(() => {
 
-  let inputs = [];
 
   $("input[type='text']").each(function() {
-    inputs.push(new InputTextView(this));
+    new InputTextView(this);
   });
 
+
+/*
+  let inputTextId = new InputTextView($("#input-text-id"));
+
+  let inputTextPass = new InputTextView($("#input-text-password"));
+
+  new InputSubmitCreateUserView("#submit", inputTextId, inputTextPass);
+*/
+/*
   $("#submit").on("click", function(e){
     e.preventDefault();
     e.stopPropagation();
     alert(inputs.length);
   });
+*/
 });
