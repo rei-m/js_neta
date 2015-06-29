@@ -295,6 +295,8 @@
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// Observerを表現するためのModel.
+	// onでeventを登録し、triggerで登録したイベントを実行する.
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -524,6 +526,7 @@
 	  _createClass(InputSubmitModel, [{
 	    key: 'validate',
 	    value: function validate() {
+
 	      var val = undefined;
 
 	      // チェック結果確認用

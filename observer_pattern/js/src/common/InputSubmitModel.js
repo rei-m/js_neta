@@ -15,6 +15,7 @@ export default class InputSubmitModel extends ObserverModel {
   }
 
   validate() {
+
     let val;
 
     // チェック結果確認用

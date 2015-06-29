@@ -1,4 +1,5 @@
-
+// Observerを表現するためのModel.
+// onでeventを登録し、triggerで登録したイベントを実行する.
 export default class ObserverModel {
 
   constructor() {
