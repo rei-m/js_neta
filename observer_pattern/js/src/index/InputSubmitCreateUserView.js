@@ -42,7 +42,7 @@ export default class InputSubmitCreateUserView extends InputSubmitView {
     e.stopPropagation();
 
     if(this.inputTextIdModel.isValid && this.inputTextPassModel.isValid){
-      alert('submitしてOK！');
+      alert('登録してOK！');
     }
   }
 }

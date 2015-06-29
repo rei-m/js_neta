@@ -107,7 +107,7 @@
 	    var elData = this.$el.data();
 
 	    // エラー表示用のリストを作成.
-	    var $errors = $('<ul>');
+	    var $errors = $('<ul>').addClass('input-error__list');
 
 	    // チェック仕様に従い、エラー情報を作成.
 	    if (this.$el.attr('required')) {
@@ -126,10 +126,12 @@
 	    }
 
 	    if (0 < $errors.children().length) {
-	      this.$el.after($errors);
+	      var $wrap = $('<span>').addClass('input-wrap');
+	      this.$el.wrap($wrap).after($errors);
 	    }
 
 	    this.$list = $errors.children();
+	    this.$list.parent().hide();
 
 	    // Modelを作成し、Viewのプロパティとする.
 	    this.model = new _InputTextModel2['default'](elData);
@@ -167,6 +169,7 @@
 	    key: 'onValid',
 	    value: function onValid() {
 	      this.$el.removeClass('error');
+	      this.$list.parent().hide();
 	      this.$list.hide();
 	    }
 	  }, {
@@ -179,6 +182,7 @@
 	      this.model.errors.map(function (val) {
 	        _this.$list.filter('[data-error="' + val + '"]').show();
 	      });
+	      this.$list.parent().show();
 	    }
 	  }]);
 
@@ -359,6 +363,7 @@
 	    _get(Object.getPrototypeOf(InputSubmitCreateUserView.prototype), 'constructor', this).call(this, el);
 
 	    this.inputTextIdModel = $inputTextId.model;
+
 	    this.inputTextPassModel = $inputTextPass.model;
 
 	    this.handleEvents();
@@ -390,11 +395,8 @@
 	  }, {
 	    key: 'onParameterChange',
 	    value: function onParameterChange() {
-	      if (this.inputTextIdModel.isValid && this.inputTextPassModel.isValid) {
-	        this.$el.prop('disabled', '');
-	      } else {
-	        this.$el.prop('disabled', 'disabled');
-	      }
+	      var isAllValid = this.inputTextIdModel.isValid && this.inputTextPassModel.isValid;
+	      this.$el.prop('disabled', !isAllValid);
 	    }
 	  }, {
 	    key: 'onClick',
@@ -405,7 +407,7 @@
 	      e.stopPropagation();
 
 	      if (this.inputTextIdModel.isValid && this.inputTextPassModel.isValid) {
-	        alert('submitしてOK！');
+	        alert('登録してOK！');
 	      }
 	    }
 	  }]);

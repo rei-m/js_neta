@@ -15,7 +15,7 @@ export default class InputTextView {
     let elData = this.$el.data();
 
     // エラー表示用のリストを作成.
-    let $errors = $('<ul>');
+    let $errors = $('<ul>').addClass('input-error__list');
 
     // チェック仕様に従い、エラー情報を作成.
     if (this.$el.attr('required')) {
@@ -38,10 +38,12 @@ export default class InputTextView {
     }
 
     if (0 < $errors.children().length) {
-      this.$el.after($errors);
+      let $wrap = $('<span>').addClass('input-wrap')
+      this.$el.wrap($wrap).after($errors);
     }
 
     this.$list = $errors.children();
+    this.$list.parent().hide();
 
     // Modelを作成し、Viewのプロパティとする.
     this.model = new InputTextModel(elData);
@@ -75,6 +77,7 @@ export default class InputTextView {
 
   onValid() {
     this.$el.removeClass('error');
+    this.$list.parent().hide();
     this.$list.hide();
   }
 
@@ -84,5 +87,6 @@ export default class InputTextView {
     this.model.errors.map((val) => {
       this.$list.filter(`[data-error="${val}"]`).show();
     });
+    this.$list.parent().show();
   }
 }
