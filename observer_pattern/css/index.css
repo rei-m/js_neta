@@ -1,3 +1,29 @@
+.input-wrap {
+  position: relative;
+}
+
+.input-error__list {
+  position: absolute;
+  right:-360px;
+  width: 340px;
+  padding-left: 10px;
+  z-index: 999;
+  top:0;
+  text-align: left;
+  background: #f5f5f5;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.input-error__list:after {
+    content: '';
+    position: absolute;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 10px solid #f5f5f5 ;
+    top: 5px;
+    left: -8px;
+}
+
 ul {
   margin: 0;
   padding: 0;
@@ -44,10 +70,6 @@ h1 {
   border-color: #e51c23;
 }
 
-.row .col ul {
-  margin-top: 0.5em;
-}
-
 .row .col li {
   display: none;
   color: #e51c23;
@@ -56,9 +78,5 @@ h1 {
   -moz-background-size: 12px 12px;
   background-size: 12px 12px;
   padding-left: 20px;
-  margin-top: 0.5em;
-}
-
-.row .col li:first-child {
-  margin-top: 0;
+  font-size : 0.8em;
 }

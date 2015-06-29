@@ -1,8 +1,5 @@
-import ObserverModel from "./ObserverModel"
+import ObserverModel from './ObserverModel'
 
-/**
- * Modelの作成
- */
 export default class InputSubmitModel extends ObserverModel {
 
   constructor(attrs) {
@@ -13,11 +10,12 @@ export default class InputSubmitModel extends ObserverModel {
     this.attrs = (attrs === void 0) ? {} : attrs;
 
     // Observerの機構を実装.
-    this.listeners["valid"] = [];
-    this.listeners["invalid"] = [];
+    this.listeners['valid'] = [];
+    this.listeners['invalid'] = [];
   }
 
   validate() {
+
     let val;
 
     // チェック結果確認用
@@ -32,7 +30,7 @@ export default class InputSubmitModel extends ObserverModel {
     // Validationの結果に応じた処理を実行
     let isErr = (this.errors.length);
 
-    this.trigger(!isErr ? "valid" : "invalid");
+    this.trigger(!isErr ? 'valid' : 'invalid');
   };
 
 }

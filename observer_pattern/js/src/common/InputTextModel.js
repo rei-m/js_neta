@@ -1,22 +1,21 @@
-import ObserverModel from "./ObserverModel"
+import ObserverModel from './ObserverModel'
 
-/**
- * Modelの作成
- */
 export default class InputTextModel extends ObserverModel {
 
   constructor(attrs) {
 
     super();
 
-    this.val = "";
+    this.val = '';
+
+    this.isValid = false;
 
     // Validateの定義
     this.attrs = (attrs === void 0) ? {} : attrs;
 
     // Observerの機構を実装.
-    this.listeners["valid"] = [];
-    this.listeners["invalid"] = [];
+    this.listeners['valid'] = [];
+    this.listeners['invalid'] = [];
   }
 
   set(val) {
@@ -37,15 +36,14 @@ export default class InputTextModel extends ObserverModel {
       if (!this[key](val)) this.errors.push(key);
     }
 
-    // Validationの結果に応じた処理を実行
-    let isErr = (this.errors.length);
+    this.isValid = (this.errors.length === 0);
 
-    this.trigger(!isErr ? "valid" : "invalid");
+    this.trigger(this.isValid ? 'valid' : 'invalid');
   };
 
   // 必須チェック
   required() {
-    return this.val !== "";
+    return this.val !== '';
   };
 
   // 文字数上限チェック

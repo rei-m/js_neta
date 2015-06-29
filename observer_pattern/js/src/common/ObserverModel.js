@@ -1,13 +1,9 @@
-/**
- * Modelの作成
- */
+// Observerを表現するためのModel.
+// onでeventを登録し、triggerで登録したイベントを実行する.
 export default class ObserverModel {
 
   constructor() {
-
-    // Observerの機構を実装.
     this.listeners = {};
-
   }
 
   on(event, func) {
