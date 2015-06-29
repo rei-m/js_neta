@@ -1,17 +1,12 @@
-/**
- * Viewから値を受け取って、値に対してバリデーションを実行する.
- * バリデーションの結果に応じてイベントを通知する.
- */
-
-import InputTextView from "../common/InputTextView"
-import {InputSubmitCreateUserView} from "./IndexView"
+import InputTextView from '../common/InputTextView'
+import InputSubmitCreateUserView from './InputSubmitCreateUserView'
 
 $(() => {
 
+  let $inputTextId = new InputTextView($('#input-text-id'));
 
-  let $inputTextId = new InputTextView($("#input-text-id"));
+  let $inputTextPass = new InputTextView($('#input-text-password'));
 
-  let $inputTextPass = new InputTextView($("#input-text-password"));
+  new InputSubmitCreateUserView('#submit', $inputTextId, $inputTextPass);
 
-  new InputSubmitCreateUserView("#submit", $inputTextId, $inputTextPass);
 });

@@ -44,28 +44,25 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {/**
-	 * Viewから値を受け取って、値に対してバリデーションを実行する.
-	 * バリデーションの結果に応じてイベントを通知する.
-	 */
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
-	"use strict";
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 	var _commonInputTextView = __webpack_require__(2);
 
 	var _commonInputTextView2 = _interopRequireDefault(_commonInputTextView);
 
-	var _IndexView = __webpack_require__(5);
+	var _InputSubmitCreateUserView = __webpack_require__(5);
+
+	var _InputSubmitCreateUserView2 = _interopRequireDefault(_InputSubmitCreateUserView);
 
 	$(function () {
 
-	  var $inputTextId = new _commonInputTextView2["default"]($("#input-text-id"));
+	  var $inputTextId = new _commonInputTextView2['default']($('#input-text-id'));
 
-	  var $inputTextPass = new _commonInputTextView2["default"]($("#input-text-password"));
+	  var $inputTextPass = new _commonInputTextView2['default']($('#input-text-password'));
 
-	  new _IndexView.InputSubmitCreateUserView("#submit", $inputTextId, $inputTextPass);
+	  new _InputSubmitCreateUserView2['default']('#submit', $inputTextId, $inputTextPass);
 	});
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
@@ -79,17 +76,17 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {"use strict";
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
 
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 	var _InputTextModel = __webpack_require__(3);
 
@@ -110,21 +107,21 @@
 	    var elData = this.$el.data();
 
 	    // エラー表示用のリストを作成.
-	    var $errors = $("<ul>");
+	    var $errors = $('<ul>');
 
 	    // チェック仕様に従い、エラー情報を作成.
-	    if (this.$el.attr("required")) {
-	      elData["required"] = "";
-	      $errors.append($("<li>").attr("data-error", "required").text("必須項目です"));
+	    if (this.$el.attr('required')) {
+	      elData['required'] = '';
+	      $errors.append($('<li>').attr('data-error', 'required').text('必須項目です'));
 	    }
 
-	    if (this.$el.attr("data-minlength")) {
-	      var $li = $("<li>").attr("data-error", "minlength").text("" + this.$el.data("minlength") + "文字以上で入力してください");
+	    if (this.$el.attr('data-minlength')) {
+	      var $li = $('<li>').attr('data-error', 'minlength').text('' + this.$el.data('minlength') + '文字以上で入力してください');
 	      $errors.append($li);
 	    }
 
-	    if (this.$el.attr("data-maxlength")) {
-	      var $li = $("<li>").attr("data-error", "maxlength").text("" + this.$el.data("maxlength") + "文字以内で入力してください");
+	    if (this.$el.attr('data-maxlength')) {
+	      var $li = $('<li>').attr('data-error', 'maxlength').text('' + this.$el.data('maxlength') + '文字以内で入力してください');
 	      $errors.append($li);
 	    }
 
@@ -135,51 +132,52 @@
 	    this.$list = $errors.children();
 
 	    // Modelを作成し、Viewのプロパティとする.
-	    this.model = new _InputTextModel2["default"](elData);
+	    this.model = new _InputTextModel2['default'](elData);
 
 	    // Eventを登録する.
-	    this.handleEvents();
+	    this.handleBaseEvents();
 	  }
 
 	  _createClass(InputTextView, [{
-	    key: "handleEvents",
-	    value: function handleEvents() {
+	    key: 'handleBaseEvents',
+	    value: function handleBaseEvents() {
 	      var self = this;
 
 	      // DomのKeyupとViewのイベントを関連付ける
-	      this.$el.on("keyup", function (e) {
+	      this.$el.on('keyup', function (e) {
 	        self.onKeyUp(e);
 	      });
 
 	      // ModelとViewのイベントを関連付ける
-	      this.model.on("valid", function () {
+	      this.model.on('valid', function () {
 	        self.onValid();
 	      });
 
-	      this.model.on("invalid", function () {
+	      this.model.on('invalid', function () {
 	        self.onInValid();
 	      });
 	    }
 	  }, {
-	    key: "onKeyUp",
+	    key: 'onKeyUp',
 	    value: function onKeyUp(e) {
 	      var $target = $(e.currentTarget);
 	      this.model.set($target.val());
 	    }
 	  }, {
-	    key: "onValid",
+	    key: 'onValid',
 	    value: function onValid() {
-	      this.$el.removeClass("error");
+	      this.$el.removeClass('error');
 	      this.$list.hide();
 	    }
 	  }, {
-	    key: "onInValid",
+	    key: 'onInValid',
 	    value: function onInValid() {
-	      var self = this;
-	      this.$el.addClass("error");
+	      var _this = this;
+
+	      this.$el.addClass('error');
 	      this.$list.hide();
 	      this.model.errors.map(function (val) {
-	        self.$list.filter("[data-error=\"" + val + "\"]").show();
+	        _this.$list.filter('[data-error="' + val + '"]').show();
 	      });
 	    }
 	  }]);
@@ -187,65 +185,63 @@
 	  return InputTextView;
 	})();
 
-	exports["default"] = InputTextView;
-	module.exports = exports["default"];
+	exports['default'] = InputTextView;
+	module.exports = exports['default'];
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
 
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 	var _ObserverModel2 = __webpack_require__(4);
 
 	var _ObserverModel3 = _interopRequireDefault(_ObserverModel2);
 
-	/**
-	 * Modelの作成
-	 */
-
 	var InputTextModel = (function (_ObserverModel) {
 	  function InputTextModel(attrs) {
 	    _classCallCheck(this, InputTextModel);
 
-	    _get(Object.getPrototypeOf(InputTextModel.prototype), "constructor", this).call(this);
+	    _get(Object.getPrototypeOf(InputTextModel.prototype), 'constructor', this).call(this);
 
-	    this.val = "";
+	    this.val = '';
+
+	    this.isValid = false;
 
 	    // Validateの定義
 	    this.attrs = attrs === void 0 ? {} : attrs;
 
 	    // Observerの機構を実装.
-	    this.listeners["valid"] = [];
-	    this.listeners["invalid"] = [];
+	    this.listeners['valid'] = [];
+	    this.listeners['invalid'] = [];
 	  }
 
 	  _inherits(InputTextModel, _ObserverModel);
 
 	  _createClass(InputTextModel, [{
-	    key: "set",
+	    key: 'set',
 	    value: function set(val) {
 	      if (this.val === val) return;
 	      this.val = val;
 	      this.validate();
 	    }
 	  }, {
-	    key: "validate",
+	    key: 'validate',
 	    value: function validate() {
 	      var val = undefined;
 
@@ -258,27 +254,26 @@
 	        if (!this[key](val)) this.errors.push(key);
 	      }
 
-	      // Validationの結果に応じた処理を実行
-	      var isErr = this.errors.length;
+	      this.isValid = this.errors.length === 0;
 
-	      this.trigger(!isErr ? "valid" : "invalid");
+	      this.trigger(this.isValid ? 'valid' : 'invalid');
 	    }
 	  }, {
-	    key: "required",
+	    key: 'required',
 
 	    // 必須チェック
 	    value: function required() {
-	      return this.val !== "";
+	      return this.val !== '';
 	    }
 	  }, {
-	    key: "maxlength",
+	    key: 'maxlength',
 
 	    // 文字数上限チェック
 	    value: function maxlength(num) {
 	      return this.val.length <= num;
 	    }
 	  }, {
-	    key: "minlength",
+	    key: 'minlength',
 
 	    // 文字数下限チェック
 	    value: function minlength(num) {
@@ -287,18 +282,15 @@
 	  }]);
 
 	  return InputTextModel;
-	})(_ObserverModel3["default"]);
+	})(_ObserverModel3['default']);
 
-	exports["default"] = InputTextModel;
-	module.exports = exports["default"];
+	exports['default'] = InputTextModel;
+	module.exports = exports['default'];
 
 /***/ },
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/**
-	 * Modelの作成
-	 */
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -313,7 +305,6 @@
 	  function ObserverModel() {
 	    _classCallCheck(this, ObserverModel);
 
-	    // Observerの機構を実装.
 	    this.listeners = {};
 	  }
 
@@ -341,80 +332,109 @@
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {"use strict";
+	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
 
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 	var _commonInputSubmitView = __webpack_require__(6);
 
 	var _commonInputSubmitView2 = _interopRequireDefault(_commonInputSubmitView);
 
-	/**
-	 * Viewの作成
-	 */
-
 	var InputSubmitCreateUserView = (function (_InputSubmitView) {
 	  function InputSubmitCreateUserView(el, $inputTextId, $inputTextPass) {
 	    _classCallCheck(this, InputSubmitCreateUserView);
 
-	    _get(Object.getPrototypeOf(InputSubmitCreateUserView.prototype), "constructor", this).call(this, el);
+	    _get(Object.getPrototypeOf(InputSubmitCreateUserView.prototype), 'constructor', this).call(this, el);
+
 	    this.inputTextIdModel = $inputTextId.model;
 	    this.inputTextPassModel = $inputTextPass.model;
+
+	    this.handleEvents();
 	  }
 
 	  _inherits(InputSubmitCreateUserView, _InputSubmitView);
 
 	  _createClass(InputSubmitCreateUserView, [{
-	    key: "onClick",
+	    key: 'handleEvents',
+	    value: function handleEvents() {
+	      var _this = this;
+
+	      this.inputTextIdModel.on('valid', function () {
+	        _this.onParameterChange();
+	      });
+
+	      this.inputTextIdModel.on('invalid', function () {
+	        _this.onParameterChange();
+	      });
+
+	      this.inputTextPassModel.on('valid', function () {
+	        _this.onParameterChange();
+	      });
+
+	      this.inputTextPassModel.on('invalid', function () {
+	        _this.onParameterChange();
+	      });
+	    }
+	  }, {
+	    key: 'onParameterChange',
+	    value: function onParameterChange() {
+	      if (this.inputTextIdModel.isValid && this.inputTextPassModel.isValid) {
+	        this.$el.prop('disabled', '');
+	      } else {
+	        this.$el.prop('disabled', 'disabled');
+	      }
+	    }
+	  }, {
+	    key: 'onClick',
 	    value: function onClick(e) {
 
 	      // デフォルトの動作はキャンセル.
 	      e.preventDefault();
 	      e.stopPropagation();
 
-	      var $target = $(e.currentTarget);
-
-	      //    this.model.set($target.val());
+	      if (this.inputTextIdModel.isValid && this.inputTextPassModel.isValid) {
+	        alert('submitしてOK！');
+	      }
 	    }
 	  }]);
 
 	  return InputSubmitCreateUserView;
-	})(_commonInputSubmitView2["default"]);
+	})(_commonInputSubmitView2['default']);
 
-	exports.InputSubmitCreateUserView = InputSubmitCreateUserView;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+	exports['default'] = InputSubmitCreateUserView;
+	module.exports = exports['default'];
 
 /***/ },
 /* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {"use strict";
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
 
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var _InputTextModel = __webpack_require__(3);
+	var _InputSubmitModel = __webpack_require__(7);
 
-	var _InputTextModel2 = _interopRequireDefault(_InputTextModel);
+	var _InputSubmitModel2 = _interopRequireDefault(_InputSubmitModel);
 
 	/**
 	 * Viewの作成
@@ -431,64 +451,100 @@
 	    var elData = this.$el.data();
 
 	    // Modelを作成し、Viewのプロパティとする.
-	    //    this.model = new InputTextModel(elData);
+	    this.model = new _InputSubmitModel2['default'](elData);
 
 	    // Eventを登録する.
-	    this.handleEvents();
+	    this.handleBaseEvents();
 	  }
 
 	  _createClass(InputSubmitView, [{
-	    key: "handleEvents",
-	    value: function handleEvents() {
+	    key: 'handleBaseEvents',
+	    value: function handleBaseEvents() {
+
 	      var self = this;
 
-	      // DomのKeyupとViewのイベントを関連付ける
-	      this.$el.on("click", function (e) {
+	      this.$el.on('click', function (e) {
 	        self.onClick(e);
 	      });
-
-	      // ModelとViewのイベントを関連付ける
-	      /*
-	          this.model.on("valid", () => {
-	            self.onValid();
-	          });
-	      
-	          this.model.on("invalid", () => {
-	            self.onInValid();
-	          });
-	      */
 	    }
 	  }, {
-	    key: "onClick",
-	    value: function onClick(e) {
-	      var $target = $(e.currentTarget);
-	      alert(1);
-	      //    this.model.set($target.val());
-	    }
-	  }, {
-	    key: "onValid",
-	    value: function onValid() {
-	      this.$el.removeClass("error");
-	      //    this.$list.hide();
-	    }
-	  }, {
-	    key: "onInValid",
-	    value: function onInValid() {
-	      var self = this;
-	      this.$el.addClass("error");
-	      //    this.$list.hide();
-	      //    this.model.errors.map((val) => {
-	      //      self.$list.filter(`[data-error="${val}"]`).show();
-	      //    });
-	    }
+	    key: 'onClick',
+	    value: function onClick(e) {}
 	  }]);
 
 	  return InputSubmitView;
 	})();
 
-	exports["default"] = InputSubmitView;
-	module.exports = exports["default"];
+	exports['default'] = InputSubmitView;
+	module.exports = exports['default'];
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+	var _ObserverModel2 = __webpack_require__(4);
+
+	var _ObserverModel3 = _interopRequireDefault(_ObserverModel2);
+
+	var InputSubmitModel = (function (_ObserverModel) {
+	  function InputSubmitModel(attrs) {
+	    _classCallCheck(this, InputSubmitModel);
+
+	    _get(Object.getPrototypeOf(InputSubmitModel.prototype), 'constructor', this).call(this);
+
+	    // Validateの定義
+	    this.attrs = attrs === void 0 ? {} : attrs;
+
+	    // Observerの機構を実装.
+	    this.listeners['valid'] = [];
+	    this.listeners['invalid'] = [];
+	  }
+
+	  _inherits(InputSubmitModel, _ObserverModel);
+
+	  _createClass(InputSubmitModel, [{
+	    key: 'validate',
+	    value: function validate() {
+	      var val = undefined;
+
+	      // チェック結果確認用
+	      this.errors = [];
+
+	      // attrで定義したチェックを実行
+	      for (var key in this.attrs) {
+	        val = this.attrs[key];
+	        if (!this[key](val)) this.errors.push(key);
+	      }
+
+	      // Validationの結果に応じた処理を実行
+	      var isErr = this.errors.length;
+
+	      this.trigger(!isErr ? 'valid' : 'invalid');
+	    }
+	  }]);
+
+	  return InputSubmitModel;
+	})(_ObserverModel3['default']);
+
+	exports['default'] = InputSubmitModel;
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);

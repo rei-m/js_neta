@@ -1,13 +1,8 @@
-/**
- * Modelの作成
- */
+
 export default class ObserverModel {
 
   constructor() {
-
-    // Observerの機構を実装.
     this.listeners = {};
-
   }
 
   on(event, func) {
